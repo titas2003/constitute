@@ -15,11 +15,6 @@ const lawyerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  regNo: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   qualificationDetail: {
     type: [String], // Array of strings
     required: true,
@@ -37,6 +32,15 @@ const lawyerSchema = new mongoose.Schema({
     required: true,
   },
   password: {
+    type: String,
+    required: true,
+  },
+  regNo: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  speciality: {
     type: String,
     required: true,
   },

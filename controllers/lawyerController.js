@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 // Function to handle lawyer registration
 const registerLawyer = async (req, res) => {
-  const { name, email, phone, qualificationDetail, chamberName, chamberLocation, availability, password, regNo } = req.body;
+  const { name, email, phone, qualificationDetail, chamberName, chamberLocation, availability, password, regNo, speciality } = req.body;
 
   try {
     // Check if the lawyer already exists
@@ -30,6 +30,7 @@ const registerLawyer = async (req, res) => {
       availability,
       password,
       regNo,
+      speciality,
     });
 
     await lawyer.save();
