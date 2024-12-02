@@ -86,4 +86,24 @@ const loginLawyer = async (req, res) => {
   }
 };
 
-module.exports = { registerLawyer, loginLawyer };
+// Function to get lawyers by speciality
+const getLawyersBySpeciality = async (req, res) => {
+  const { speciality } = req.body;
+
+  try {
+    const lawyers = await Lawyer.find({ speciality });
+
+    // Map the lawyers to their regNo and email
+    const lawyerDetails = lawyers.map(lawyer => ({
+      regNo: lawyer.regNo,
+      email: lawyer.email,
+    }));
+
+    res.json({ lawyerDetails });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = { registerLawyer, loginLawyer, getLawyersBySpeciality };

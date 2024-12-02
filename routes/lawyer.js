@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerLawyer, loginLawyer } = require('../controllers/lawyerController');
+const { registerLawyer, loginLawyer, getLawyersBySpeciality } = require('../controllers/lawyerController');
 
 const router = express.Router();
 
@@ -8,5 +8,8 @@ router.post('/register', registerLawyer);
 
 // Lawyer login route
 router.post('/login', loginLawyer);
+
+// Get lawyers by speciality
+router.post('/by-speciality', getLawyersBySpeciality);
 
 module.exports = router;
