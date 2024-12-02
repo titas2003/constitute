@@ -1,29 +1,25 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-
-// Load environment variables from .env file
-dotenv.config();
-
-// Import the DB connection function
-const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
+const lawyerRoutes = require('./routes/lawyer');
+const connectDB = require('./config/db');
 
-// Create the Express app
+dotenv.config();
+
 const app = express();
-const port = process.env.PORT || 3000;
-
-// Middleware for parsing JSON bodies
-app.use(express.json());
 
 // Connect to the database
 connectDB();
 
-// Use user routes
+// Middleware
+app.use(express.json());
+
+// Routes
 app.use('/api/users', userRoutes);
 app.use('/api/appointments', appointmentRoutes);
+app.use('/api/lawyers', lawyerRoutes);
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
