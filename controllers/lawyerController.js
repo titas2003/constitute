@@ -106,4 +106,32 @@ const getLawyersBySpeciality = async (req, res) => {
   }
 };
 
-module.exports = { registerLawyer, loginLawyer, getLawyersBySpeciality };
+// Function to get lawyer by registration number
+const getLawyerByRegNo = async (req, res) => {
+  const { regNo } = req.params;
+
+  try {
+    const lawyer = await Lawyer.findOne({ regNo });
+
+    if (!lawyer) {
+      return res.status(404).json({ message: 'Lawyer not found' });
+    }
+
+    res.json({
+      name: lawyer.name,
+      email: lawyer.email,
+      phone: lawyer.phone,
+      qualificationDetail: lawyer.qualificationDetail,
+      chamberName: lawyer.chamberName,
+      chamberLocation: lawyer.chamberLocation,
+      availability: lawyer.availability,
+      speciality: lawyer.speciality,
+      regNo: lawyer.regNo,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = { registerLawyer, loginLawyer, getLawyersBySpeciality, getLawyerByRegNo };
